@@ -12,9 +12,23 @@
     "postinstall": "nuxt prepare .playground"
   },
   "devDependencies": {
+    "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.1.1",
     "eslint": "^8.28.0",
     "nuxt": "^3.8.2",
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5",
     "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@csstools/postcss-global-data": "^2.1.0",
+    "@vueuse/core": "^10.4.1",
+    "@wagmi/chains": "^1.8.0",
+    "@wagmi/core": "^1.4.2",
+    "buffer": "^6.0.3",
+    "feather-icons": "4",
+    "postcss-preset-env": "^9.1.4",
+    "viem": "^1.11.0",
+    "vue-feather": "2"
   }
 }
