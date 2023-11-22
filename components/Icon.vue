@@ -26,6 +26,8 @@ const ICONS = {
 <style lang="postcss" scoped>
 .icon {
   display: inline-block;
+  width: var(--size-5);
+  height: var(--size-5);
 
   :deep(svg) {
     width: 100%;
