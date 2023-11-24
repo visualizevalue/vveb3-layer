@@ -49,6 +49,8 @@ dialog {
   padding: 0;
   transition: all var(--speed);
   min-width: min(24rem, 90vw);
+  background: var(--gray-z-0);
+  color: var(--color);
 
   > * {
     padding: 0 var(--size-4);
