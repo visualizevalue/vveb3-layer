@@ -16,7 +16,6 @@
 
 <script setup>
 import { vIntersectionObserver } from '@vueuse/components'
-import { get } from '~/api'
 
 const props = defineProps({
   url: String,
@@ -59,7 +58,7 @@ const loadMore = async () => {
       queryParams = `page=${page.value}`
     }
 
-    const result = await get(`${url.value}?${queryParams}`)
+    const result = await $fetch(`${url.value}?${queryParams}`)
 
     meta.value = metaAccessor(result)
     const newItems = itemsAccessor(result)
