@@ -3,7 +3,7 @@
     <slot :items="items" :meta="meta" :loading="loading" />
 
     <slot name="loading">
-      <Loading v-if="loading" />
+      <span v-if="loading">Loading...</span>
     </slot>
 
     <aside
