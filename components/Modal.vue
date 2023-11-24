@@ -4,15 +4,13 @@
       <dialog v-if="open" ref="modal" :class="[modalClasses]">
         <header v-if="title">
           <h1>{{ title }}</h1>
-          <button @click="$emit('close')" class="close"><Icon type="x" /></button>
+          <button v-if="clickOutside" @click="$emit('close')" class="close"><Icon type="x" /></button>
           <slot name="header" />
         </header>
         <section>
           <slot />
         </section>
-        <footer>
-          <slot name="footer" />
-        </footer>
+        <slot name="footer" />
       </dialog>
     </Transition>
   </Teleport>
@@ -39,6 +37,10 @@ watch(() => props.open, () => {
   if (props.open) {
     nextTick(() => {
       modal.value?.showModal()
+
+      modal.value.addEventListener('cancel', (e) => {
+        e.preventDefault()
+      })
     })
   }
 })
@@ -51,6 +53,7 @@ dialog {
   min-width: min(24rem, 90vw);
   background: var(--gray-z-0);
   color: var(--color);
+  outline: none;
 
   > * {
     padding: 0 var(--size-4);
