@@ -2,9 +2,11 @@
   <div>
     <slot :items="items" :meta="meta" :loading="loading" />
 
-    <slot name="loading">
-      <span v-if="loading">Loading...</span>
-    </slot>
+    <div v-if="loading" class="loading">
+      <slot name="loading">
+        <span>Loading...</span>
+      </slot>
+    </div>
 
     <aside
       v-if="hasMore && !loading"
