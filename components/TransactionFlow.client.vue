@@ -9,7 +9,7 @@
   >
     <section class="flow-content">
       <div>
-        <IconsInfinityFlower v-if="step !== 'complete'" class="spin-infinite" :thickness="2" />
+        <CheckSpinner v-if="step !== 'complete'" class="spin-infinite" :thickness="2" />
         <h1 v-if="text.title[step]">{{ text.title[step] }}</h1>
         <p>{{ text.lead[step] }}</p>
         <p v-if="step === 'waiting'"><a :href="txLink" target="_blank" class="link">Check on {{ blockExplorer.name }}</a></p>
@@ -28,7 +28,6 @@
 
 <script setup>
 import { waitForTransaction } from '@wagmi/core'
-import { delay } from '~/helpers/time'
 
 const props = defineProps({
   text: {
@@ -149,15 +148,11 @@ defineExpose({
 })
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
   .flow-content {
-    > *:first-child {
-      margin-top: var(--size-6);
-    }
-
-    > *:last-child:not(.actions) {
-      margin-bottom: var(--size-6);
-    }
+    display: grid;
+    gap: var(--size-4);
+    padding: var(--padding);
   }
 
   .spin-infinite {
