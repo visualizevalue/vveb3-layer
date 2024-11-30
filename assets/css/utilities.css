@@ -1,9 +1,0 @@
-.hidden-sm {
-  @media (--max-sm) {
-    display: none;
-  }
-}
-
-.muted {
-  color: var(--gray-z-5);
-}

@@ -1,34 +1,114 @@
-import { createResolver } from '@nuxt/kit'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
 
-const { resolve } = createResolver(import.meta.url)
+const currentDir = dirname(fileURLToPath(import.meta.url))
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  css: [
-    resolve('./assets/css/index.css'),
+  ssr: process.env.NUXT_SSR !== 'false',
+
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/i18n',
   ],
+
+  runtimeConfig: {
+    public: {
+      title: 'VVEB3 STARTER',
+      blockExplorer: 'https://etherscan.io',
+      chainId: 1,
+      rpc1: 'https://eth.llamarpc.com',
+      rpc2: 'https://ethereum-rpc.publicnode.com',
+      rpc3: 'https://eth.drpc.org',
+      walletConnectProjectId: '',
+    }
+  },
+
+  app: {
+    head: {
+      viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
+      htmlAttrs: { lang: 'en' },
+      title: process.env.NUXT_PUBLIC_TITLE,
+      link: [
+        { rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' },
+      ]
+    },
+  },
+
+  css: [
+    join(currentDir, './assets/styles/index.css'),
+  ],
+
   postcss: {
     plugins: {
       '@csstools/postcss-global-data': {
         files: [
-          resolve('./assets/css/custom-media.css'),
-          resolve('./assets/css/custom-selectors.css'),
-        ],
+          join(currentDir, './assets/styles/custom-selectors.css'),
+          join(currentDir, './assets/styles/custom-media.css'),
+        ]
       },
+      'postcss-nested': {},
+      'postcss-custom-selectors': {},
+      'postcss-custom-media': {},
       'postcss-preset-env': {
-        stage: 1,
-        features: {
-          'nesting-rules': {
-            noIsPseudoSelector: false,
-          }
-        }
-      }
-    }
-  },
-  vite: {
-    esbuild: {
-      minifyIdentifiers: false
+        stage: 3,
+        features: {},
+      },
+      'autoprefixer': {},
     },
   },
+
+  hooks: {
+    'vite:extendConfig': (config) => {
+      config.optimizeDeps ??= {}
+      config.optimizeDeps.include = config.optimizeDeps.include || []
+      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > eventemitter3')
+      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > buffer/')
+      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > codemirror')
+      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > codemirror-editor-vue3')
+    }
+  },
+
+  nitro: {
+    preset: 'node-cluster',
+    esbuild: {
+      options: {
+        target: 'esnext'
+      }
+    },
+  },
+
+  imports: {
+    presets: [
+      {
+        from: '@wagmi/core',
+        imports: [
+          'readContract',
+          'waitForTransactionReceipt',
+          'writeContract',
+        ]
+      },
+      {
+        from: 'viem',
+        imports: [
+          'decodeEventLog',
+          'isAddress',
+          'getAddress',
+          'toBytes',
+          'toHex',
+          'getContract',
+          'encodeAbiParameters',
+          'parseAbiParameters',
+          'parseAbiParameter',
+        ]
+      }
+    ]
+  },
+
+  piniaPersistedstate: {
+    storage: 'localStorage'
+  },
+
+  compatibilityDate: '2024-08-14',
 })
