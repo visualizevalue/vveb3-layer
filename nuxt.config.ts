@@ -13,6 +13,10 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
   ],
 
+  i18n: {
+    vueI18n: join(currentDir, './i18n.config.ts'),
+  },
+
   runtimeConfig: {
     public: {
       title: 'VVEB3 STARTER',
