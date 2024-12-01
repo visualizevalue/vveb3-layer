@@ -9,7 +9,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
   ],
 
@@ -63,10 +63,8 @@ export default defineNuxtConfig({
     'vite:extendConfig': (config) => {
       config.optimizeDeps ??= {}
       config.optimizeDeps.include = config.optimizeDeps.include || []
-      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > eventemitter3')
-      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > buffer/')
-      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > codemirror')
-      config.optimizeDeps.include.push('@visualizevalue/mint-app-base > codemirror-editor-vue3')
+      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > eventemitter3')
+      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > buffer/')
     }
   },
 
