@@ -20,16 +20,21 @@
     <Actions>
       <Button>Foo</Button>
       <Button>Bar</Button>
-      <Button @click="modalOpen = true">Open Modal</Button>
+      <Button @click="dialogOpen = true">Open Modal</Button>
+      <Button @click="popoverOpen = true">Open Popover</Button>
     </Actions>
 
-    <Modal v-model:open="modalOpen">
+    <Modal v-model:open="dialogOpen">
       <p>Hellooooo</p>
 
       <Actions>
-        <Button @click="modalOpen = false">Close</Button>
+        <Button @click="dialogOpen = false">Close</Button>
       </Actions>
     </Modal>
+
+    <Popover v-model:open="popoverOpen">
+      <h1>Foo</h1>
+    </Popover>
 
     <Card>
       <h1>Card title</h1>
@@ -44,7 +49,8 @@
 </template>
 
 <script setup>
-const modalOpen = ref(false)
+const dialogOpen = ref(false)
+const popoverOpen = ref(false)
 </script>
 
 <style scoped>

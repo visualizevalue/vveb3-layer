@@ -1,28 +1,37 @@
 <template>
   <Teleport to="body">
-    <dialog ref="dialog" :class="props.class" @cancel.stop.prevent="open = false">
-      <button v-if="xClose" class="close" @click="open = false">
+    <div
+      popover
+      ref="popover"
+      class="popover"
+      @cancel="dismiss"
+    >
+      <button v-if="xClose" class="close" @click="dismiss">
         <Icon type="close" />
       </button>
 
       <slot />
-    </dialog>
+    </div>
   </Teleport>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
+  id: String,
   class: String,
-  xClose: Boolean,
+  xClose: {
+    type: Boolean,
+    default: true,
+  },
 })
 const open = defineModel('open', { required: true })
-const dialog = ref(null)
+const popover = ref(null)
 
-const show = () => dialog.value?.showModal()
+const show = () => popover.value?.showPopover()
 const hide = () => {
   return new Promise((resolve) => {
     const keyFrame = new KeyframeEffect(
-      dialog.value,
+      popover.value,
       [{ translate: '0 var(--spacer)', opacity: '0' }],
       { duration: 300, easing: 'ease', direction: 'normal' }
     )
@@ -30,11 +39,14 @@ const hide = () => {
     const animation = new Animation(keyFrame, document.timeline)
 
     animation.onfinish = () => {
-      dialog.value.close()
+      popover.value.hidePopover()
       resolve()
     }
     animation.play()
   })
+}
+const dismiss = () => {
+  open.value = false
 }
 
 // Keep track of the open/hide state
@@ -42,7 +54,7 @@ watchEffect(() => open.value ? show() : hide())
 </script>
 
 <style>
-dialog {
+[popover] {
   position: fixed;
   padding: calc(var(--spacer)*2);
   max-width: var(--dialog-width);
@@ -62,14 +74,14 @@ dialog {
     pointer-events: none;
   }
 
-  &[open] {
+  &:popover-open {
     animation: fade-in var(--speed);
     opacity: 1;
     pointer-events: all;
 
     &::backdrop {
-      background: var(--dialog-background-color);
-      backdrop-filter: var(--blur);
+      background: var(--popover-background-color);
+      backdrop-filter: var(--popover-backdrop-filter);
       pointer-events: none;
     }
   }
@@ -105,3 +117,4 @@ body:has(dialog[open]) {
   overflow: hidden;
 }
 </style>
+
