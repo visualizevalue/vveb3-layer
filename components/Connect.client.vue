@@ -9,8 +9,7 @@
   <Teleport to="body">
     <Modal
       v-if="showConnect"
-      :open="chooseModalOpen"
-      @close="closeModal"
+      v-model:open="chooseModalOpen"
     >
       <div class="wallet-options">
         <Button
@@ -62,9 +61,6 @@ const shownConnectors = computed(() => {
 })
 
 const chooseModalOpen = ref(false)
-const closeModal = () => {
-  chooseModalOpen.value = false
-}
 const login = async (connector) => {
   connect({ connector, chainId })
 

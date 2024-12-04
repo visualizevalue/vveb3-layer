@@ -1,17 +1,28 @@
 <template>
   <Teleport to="body">
-    <dialog ref="dialog" :class="class">
+    <dialog ref="dialog" :class="props.class" @cancel="cancel">
+      <button v-if="xClose" class="close" @click="isOpen = false">
+        <Icon type="close" />
+      </button>
+
       <slot />
     </dialog>
   </Teleport>
 </template>
 
 <script setup>
-defineProps({ class: 'String' })
+import { useEventListener } from '@vueuse/core'
 
-const dialog = ref()
+const props = defineProps({
+  class: String,
+  xClose: Boolean,
+})
+const isOpen = defineModel('open', { required: true })
 
-const close = () => {
+const dialog = ref(null)
+
+const show = () => dialog.value?.showModal()
+const hide = () => {
   return new Promise((resolve) => {
     const keyFrame = new KeyframeEffect(
       dialog.value,
@@ -20,22 +31,22 @@ const close = () => {
     )
 
     const animation = new Animation(keyFrame, document.timeline)
-    animation.play()
+
     animation.onfinish = () => {
       dialog.value.close()
       resolve()
     }
+    animation.play()
   })
 }
-
-const open = () => {
-  dialog.value.showModal()
+const cancel = e => {
+  e.preventDefault()
+  e.stopPropagation()
+  isOpen.value = false
 }
 
-defineExpose({
-  close,
-  open,
-})
+// Keep track of the open/hide state
+watchEffect(() => isOpen.value ? show() : hide())
 </script>
 
 <style>
@@ -53,16 +64,22 @@ dialog {
   pointer-events: none;
   align-content: center;
 
+  &::backdrop {
+    background: transparent;
+    backdrop-filter: none;
+    pointer-events: none;
+  }
+
   &[open] {
     animation: fade-in var(--speed);
     opacity: 1;
     pointer-events: all;
-  }
 
-  &::backdrop {
-    background: var(--dialog-background-color);
-    backdrop-filter: var(--blur);
-    pointer-events: none;
+    &::backdrop {
+      background: var(--dialog-background-color);
+      backdrop-filter: var(--blur);
+      pointer-events: none;
+    }
   }
 
   > .close {

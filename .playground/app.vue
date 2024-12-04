@@ -20,7 +20,16 @@
     <Actions>
       <Button>Foo</Button>
       <Button>Bar</Button>
+      <Button @click="modalOpen = true">Open Modal</Button>
     </Actions>
+
+    <Modal v-model:open="modalOpen">
+      <p>Hellooooo</p>
+
+      <Actions>
+        <Button @click="modalOpen = false">Close</Button>
+      </Actions>
+    </Modal>
 
     <Card>
       <h1>Card title</h1>
@@ -33,6 +42,10 @@
     <Embed src="https://ipfs.vv.xyz/ipfs/QmXX3zc7xfS5rCdpXySRy1YcQdhsnUEWFszq66CUDYyvSh?filename=bunney-square.mp4" />
   </main>
 </template>
+
+<script setup>
+const modalOpen = ref(false)
+</script>
 
 <style scoped>
 main {
