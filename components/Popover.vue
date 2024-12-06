@@ -1,10 +1,10 @@
 <template>
   <Teleport to="body">
     <div
-      popover
+      :popover="mode"
       ref="popover"
       class="popover"
-      @cancel="dismiss"
+      @toggle.stop.prevent="maybeDismiss"
     >
       <button v-if="xClose" class="close" @click="dismiss">
         <Icon type="close" />
@@ -19,6 +19,10 @@
 const props = defineProps({
   id: String,
   class: String,
+  mode: {
+    type: String,
+    default: 'manual'
+  },
   xClose: {
     type: Boolean,
     default: true,
@@ -28,26 +32,10 @@ const open = defineModel('open', { required: true })
 const popover = ref(null)
 
 const show = () => popover.value?.showPopover()
-const hide = () => {
-  return new Promise((resolve) => {
-    const keyFrame = new KeyframeEffect(
-      popover.value,
-      [{ translate: '0 var(--spacer)', opacity: '0' }],
-      { duration: 300, easing: 'ease', direction: 'normal' }
-    )
+const hide = () => popover.value?.hidePopover()
 
-    const animation = new Animation(keyFrame, document.timeline)
-
-    animation.onfinish = () => {
-      popover.value.hidePopover()
-      resolve()
-    }
-    animation.play()
-  })
-}
-const dismiss = () => {
-  open.value = false
-}
+const dismiss = () => open.value = false
+const maybeDismiss = (e) => e.newState === 'closed' ? dismiss() : null
 
 // Keep track of the open/hide state
 watchEffect(() => open.value ? show() : hide())
@@ -64,9 +52,16 @@ watchEffect(() => open.value ? show() : hide())
   border: var(--border);
   overscroll-behavior: contain;
   height: min-content;
-  opacity: 0;
   pointer-events: none;
   align-content: center;
+  transition-behavior: allow-discrete;
+  transition: all var(--speed);
+  transition:
+    opacity var(--speed) ease-out,
+    transform var(--speed) ease-out,
+    display var(--speed) allow-discrete;
+  transform: translateY(var(--spacer));
+  opacity: 0;
 
   &::backdrop {
     background: transparent;
@@ -75,9 +70,14 @@ watchEffect(() => open.value ? show() : hide())
   }
 
   &:popover-open {
-    animation: fade-in var(--speed);
     opacity: 1;
+    transform: translateY(0);
     pointer-events: all;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(var(--spacer));
+    }
 
     &::backdrop {
       background: var(--popover-background-color);

@@ -32,7 +32,7 @@
       </Actions>
     </Modal>
 
-    <Popover v-model:open="popoverOpen">
+    <Popover v-model:open="popoverOpen" mode="auto">
       <h1>Foo</h1>
     </Popover>
 
