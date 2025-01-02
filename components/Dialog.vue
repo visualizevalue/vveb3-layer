@@ -30,7 +30,7 @@ const hide = () => {
     const animation = new Animation(keyFrame, document.timeline)
 
     animation.onfinish = () => {
-      dialog.value.close()
+      dialog.value?.close()
       resolve()
     }
     animation.play()
