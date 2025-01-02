@@ -37,6 +37,7 @@ const ICONS = {
   'MetaMask': 'metamask.svg',
   'WalletConnect': 'walletconnect.svg',
   'Rainbow': 'rainbow.svg',
+  'Phantom': 'phantom.svg',
 }
 
 const props = defineProps(['class'])
