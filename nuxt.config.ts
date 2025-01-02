@@ -69,6 +69,9 @@ export default defineNuxtConfig({
       config.optimizeDeps.include = config.optimizeDeps.include || []
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > eventemitter3')
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > buffer/')
+      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > viem')
+      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @wagmi/core')
+      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @wagmi/vue')
     }
   },
 
