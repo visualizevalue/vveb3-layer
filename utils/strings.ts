@@ -35,3 +35,8 @@ export const extractURLs = (str: string) => {
 
 // Replace special characters with their escaped counterparts
 export const sanitizeForJson = (input: string): string => JSON.stringify(input).slice(1, -1)
+
+// Shorten an Ethereum address
+export const shortAddress = (address: string, length: number = 3) => address.substring(0, length + 2) +
+  '...' +
+  address.substring(address.length - length)
