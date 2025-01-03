@@ -69,7 +69,6 @@ export default defineNuxtConfig({
       config.optimizeDeps.include = config.optimizeDeps.include || []
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > eventemitter3')
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > buffer/')
-      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > cross-fetch')
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @metamask/sdk')
     }
   },
