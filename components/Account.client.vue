@@ -1,13 +1,15 @@
 <template>
-  <span>
-    {{ display }}
-  </span>
+  <slot :diplay="display" :is-current="isCurrent">
+    <span>{{ isCurrent ? `You` : display }}</span>
+  </slot>
 </template>
 
 <script setup>
 import { useAccount, useEnsName } from '@wagmi/vue'
 
-const props = defineProps(['address'])
+const props = defineProps({
+  address: String
+})
 
 const address = computed(() => props.address?.value || props.address)
 
@@ -19,7 +21,5 @@ const { data: ens } = useEnsName({
   chainId: 1,
 })
 
-const display = computed(() => ens.value || (
-  isCurrent.value ? `You` : shortAddress(address.value)
-))
+const display = computed(() => ens.value || shortAddress(address.value))
 </script>
