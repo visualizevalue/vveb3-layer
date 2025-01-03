@@ -1,5 +1,5 @@
 <template>
-  <slot :diplay="display" :is-current="isCurrent">
+  <slot :display="display" :is-current="isCurrent">
     <span>{{ isCurrent ? `You` : display }}</span>
   </slot>
 </template>
