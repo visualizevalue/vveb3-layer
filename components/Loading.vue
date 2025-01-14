@@ -23,10 +23,8 @@ const { txt } = defineProps({
   gap: var(--spacer-sm);
 
   .text {
-    text-transform: var(--text-transform-ui);
+    @mixin ui-font;
     color: var(--muted);
-    font-family: var(--ui-font-family);
-    font-weight: var(--ui-font-weight);
   }
 
   &:not(.inline) {

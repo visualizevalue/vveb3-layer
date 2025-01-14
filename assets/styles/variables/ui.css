@@ -1,6 +1,6 @@
 :root {
 
-  --ui-font-family:         var(--font-family);
+  --ui-font-family:         monospace;
   --ui-font-size:           var(--font-base);
   --ui-font-weight:         var(--font-weight);
   --ui-text-transform:      var(--text-transform);

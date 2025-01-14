@@ -24,8 +24,8 @@ defineProps({
   justify-content: center;
   align-items: center;
   gap: calc(var(--ui-padding-x) / 2);
-  letter-spacing: var(--ui-letter-spacing);
-  line-height: var(--ui-line-height);
+
+  @mixin ui-font;
 
   background: var(--button-background);
   padding: var(--ui-padding-y) var(--ui-padding-x);

@@ -52,6 +52,9 @@ export default defineNuxtConfig({
           join(currentDir, './assets/styles/custom-media.css'),
         ]
       },
+      'postcss-mixins': {
+        mixinsDir: join(currentDir, './assets/styles/mixins'),
+      },
       'postcss-nested': {},
       'postcss-custom-selectors': {},
       'postcss-custom-media': {},

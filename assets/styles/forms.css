@@ -3,11 +3,9 @@ button,
 input,
 textarea,
 select {
+  @mixin ui-font;
+
   width: 100%;
-  font-family: var(--ui-font-family);
-  font-size: var(--ui-font-size);
-  font-weight: var(--ui-font-weight);
-  text-transform: var(--ui-text-transform);
   transition: all var(--speed);
   line-height: var(--ui-line-height);
   border-radius: var(--button-border-radius);
@@ -147,9 +145,7 @@ form {
 form label,
 label.form-label,
 label:has(.form-item) {
-  font-family: var(--ui-font-family);
-  font-size: var(--ui-font-size);
-  text-transform: var(--text-transform-ui);
+  @mixin ui-font;
   margin: var(--size-2) 0;
   transition: all var(--speed);
   display: grid;
