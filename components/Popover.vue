@@ -93,7 +93,7 @@ watchEffect(() => open.value ? show() : hide())
     width: var(--spacer);
     height: var(--spacer);
     padding: 0;
-    z-index: 10;
+    z-index: var(--z-index-dialog);
   }
 
   > h1 {

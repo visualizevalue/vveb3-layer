@@ -16,7 +16,7 @@ const { txt } = defineProps({
 <style scoped>
 .loader {
   position: relative;
-  z-index: 2;
+  z-index: var(--z-index-ui);
   display: flex;
   align-items: center;
   justify-content: center;
