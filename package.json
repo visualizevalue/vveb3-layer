@@ -1,6 +1,6 @@
 {
     "name": "@visualizevalue/vveb3-layer",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "type": "module",
     "main": "./nuxt.config.ts",
     "scripts": {
@@ -28,7 +28,7 @@
         "postcss-custom-selectors": "^8.0.4",
         "postcss-nested": "^7.0.2",
         "postcss-preset-env": "^10.1.1",
-        "viem": "^2.22.1"
+        "viem": "^2.22.8"
     },
     "devDependencies": {
         "nuxt": "^3.14.159",

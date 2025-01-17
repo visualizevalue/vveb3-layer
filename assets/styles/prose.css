@@ -6,6 +6,13 @@
     white-space: nowrap;
     margin: var(--spacer) 0;
     color: var(--color);
+  }
+
+  h1 {
+    font-size: var(--font-xl);
+  }
+
+  h2, h3 {
     font-size: var(--font-lg);
   }
 

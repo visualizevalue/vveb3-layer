@@ -1,11 +1,11 @@
 <template>
-  <menu>
+  <menu class="actions">
     <slot />
   </menu>
 </template>
 
 <style scoped>
-menu {
+.actions {
   margin: 0;
   padding: 0;
   border: 0;

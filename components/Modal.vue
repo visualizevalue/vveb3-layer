@@ -9,8 +9,6 @@
 </template>
 
 <script setup>
-import { useEventListener } from '@vueuse/core'
-
 const open = defineModel('open', { required: true })
 
 const props = defineProps({
