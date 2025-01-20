@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <dialog ref="dialog" :class="props.class" @cancel.stop.prevent="open = false">
-      <button v-if="xClose" class="close" @click="open = false">
+      <button v-if="xClose" class="close unstyled" @click="open = false">
         <Icon type="close" />
       </button>
 
@@ -82,6 +82,10 @@ dialog {
     height: var(--spacer);
     padding: 0;
     z-index: var(--z-index-dialog);
+
+    &:--highlight {
+      outline: none;
+    }
   }
 
   > h1 {
