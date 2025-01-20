@@ -16,5 +16,9 @@
   &:empty {
     display: none;
   }
+
+  :deep(.button) {
+    width: auto;
+  }
 }
 </style>
