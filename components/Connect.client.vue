@@ -1,5 +1,5 @@
 <template>
-  <Button v-if="showConnect" @click="chooseModalOpen = true" :class="class">
+  <Button v-if="showConnect" @click="chooseModalOpen = true" :class="className">
     <slot>{{ $t('connect_action') }}</slot>
   </Button>
   <slot v-else name="connected" :address="address">
@@ -40,7 +40,7 @@ const ICONS = {
   'Phantom': 'phantom.svg',
 }
 
-const props = defineProps(['class'])
+const props = defineProps(['className'])
 const emit = defineEmits(['connected', 'disconnected'])
 const base = useBaseURL()
 

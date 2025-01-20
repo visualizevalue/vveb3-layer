@@ -1,5 +1,5 @@
 <template>
-  <Button v-if="isConnected" @click="disconnect" :class="class">
+  <Button v-if="isConnected" @click="disconnect" :class="className">
     <slot>{{ $t('disconnect_action') }}</slot>
   </Button>
 </template>
@@ -7,7 +7,7 @@
 <script setup>
 import { useAccount, useDisconnect } from '@wagmi/vue'
 
-const props = defineProps(['class'])
+const props = defineProps(['className'])
 
 const { isConnected } = useAccount()
 const { disconnect } = useDisconnect()

@@ -1,7 +1,8 @@
 .button,
-input,
-textarea,
-select {
+button:not(.unstyled),
+input:not(.unstyled),
+textarea:not(.unstyled),
+select:not(.unstyled) {
   @mixin ui-font;
 
   width: 100%;
