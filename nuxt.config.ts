@@ -72,7 +72,13 @@ export default defineNuxtConfig({
       config.optimizeDeps.include = config.optimizeDeps.include || []
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > eventemitter3')
       config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > buffer/')
-      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @metamask/sdk')
+      config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @wagmi/connectors')
+      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @metamask/sdk')
+      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @coinbase/wallet-sdk')
+      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer > @walletconnect/ethereum-provider')
+      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer >  @safe-global/safe-apps-provider')
+      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer >  @safe-global/safe-apps-sdk')
+      // config.optimizeDeps.include.push('@visualizevalue/vveb3-layer >  @safe-global/safe-apps-sdk')
     }
   },
 
