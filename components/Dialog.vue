@@ -90,7 +90,7 @@ dialog {
 
   > h1 {
     padding-right: var(--size-6);
-    font-family: var(--font-family-ui);
+    font-family: var(--ui-font-family);
     font-size: var(--font-lg);
     text-transform: var(--text-transform);
     margin-bottom: var(--size-3);
