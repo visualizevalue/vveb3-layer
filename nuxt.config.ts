@@ -88,6 +88,12 @@ export default defineNuxtConfig({
   imports: {
     presets: [
       {
+        from: 'luxon',
+        imports: [
+          'DateTime',
+        ]
+      },
+      {
         from: '@wagmi/core',
         imports: [
           'readContract',
