@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@csstools/postcss-global-data": "^3.0.0",
+        "@headlessui/vue": "^1.7.23",
         "@nuxtjs/i18n": "^9.1.0",
         "@pinia/nuxt": "^0.8.0",
         "@tanstack/vue-query": "^5.62.0",
