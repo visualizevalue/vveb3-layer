@@ -68,7 +68,7 @@ defineProps({
 
     .icon {
       align-self: center;
-      height: inherit;
+      height: 1em;
     }
   }
 
@@ -78,7 +78,9 @@ defineProps({
     align-items: baseline;
     height: inherit;
     margin: 0 !important;
-    padding: 0 calc(var(--ui-padding-x)/2) !important;
+    padding: 0 var(--size-1) !important;
+    gap: 0.2em;
+    width: min-content;
   }
 }
 </style>
