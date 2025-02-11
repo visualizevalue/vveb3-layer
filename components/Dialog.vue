@@ -1,7 +1,12 @@
 <template>
   <Teleport to="body">
     <dialog ref="dialog" :class="props.class" @cancel.stop.prevent="open = false">
-      <button v-if="xClose" class="close unstyled" @click="open = false">
+      <button
+        v-if="xClose"
+        class="close unstyled"
+        @touchdown="open = false"
+        @click="open = false"
+      >
         <Icon type="close" />
       </button>
 
