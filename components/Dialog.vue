@@ -60,6 +60,12 @@ dialog {
   opacity: 0;
   pointer-events: none;
   align-content: center;
+  max-height: 100dvh;
+  container-type: inline-size;
+
+  @media (--md) {
+    max-height: auto;
+  }
 
   &::backdrop {
     background: transparent;
@@ -97,7 +103,7 @@ dialog {
     padding-right: var(--size-6);
     font-family: var(--ui-font-family);
     font-size: var(--font-lg);
-    text-transform: var(--text-transform);
+    text-transform: var(--ui-text-transform);
     margin-bottom: var(--size-3);
   }
 
