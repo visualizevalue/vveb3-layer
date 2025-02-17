@@ -64,7 +64,7 @@ dialog {
   container-type: inline-size;
 
   @media (--md) {
-    max-height: auto;
+    max-height: calc(100dvh - var(--spacer)*2);
   }
 
   &::backdrop {
