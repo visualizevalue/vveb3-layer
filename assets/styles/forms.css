@@ -146,7 +146,6 @@ form label,
 label.form-label,
 label:has(.form-item) {
   @mixin ui-font;
-  margin: var(--size-2) 0;
   transition: all var(--speed);
   display: grid;
   gap: var(--size-2);
