@@ -3,7 +3,6 @@
   h1, h2, h3 {
     width: min-content;
     position: relative;
-    white-space: nowrap;
     margin: var(--spacer) 0;
     color: var(--color);
   }
