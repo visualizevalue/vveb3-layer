@@ -1,7 +1,7 @@
 .card {
   display: grid;
   gap: var(--spacer);
-  background: var(--card-background);
+  background-color: var(--card-background);
   height: 100%;
   padding: var(--spacer);
 
@@ -24,7 +24,7 @@
   &:has(> .card-link) {
     &:has(> .card-link:hover),
     &:has(> .card-link:focus) {
-      background: var(--card-background-highlight);
+      background-color: var(--card-background-highlight);
     }
   }
 
