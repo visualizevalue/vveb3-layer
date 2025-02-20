@@ -21,8 +21,18 @@
       <Button>Foo</Button>
       <Button>Bar</Button>
       <Button @click="dialogOpen = true">Open Modal</Button>
+      <Button @click="compatDialogOpen = true">Open Compat Modal</Button>
       <Button @click="popoverOpen = true">Open Popover</Button>
     </Actions>
+
+    <Modal v-model:open="compatDialogOpen" compat>
+      <p>Hellooooo Compat Dialog</p>
+
+      <Actions>
+        <Button @click="compatDialogOpen = false">Close</Button>
+      </Actions>
+    </Modal>
+
 
     <Modal v-model:open="dialogOpen">
       <p>Hellooooo</p>
@@ -50,6 +60,7 @@
 
 <script setup>
 const dialogOpen = ref(false)
+const compatDialogOpen = ref(false)
 const popoverOpen = ref(false)
 </script>
 

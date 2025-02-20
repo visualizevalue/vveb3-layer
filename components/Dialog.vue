@@ -1,6 +1,12 @@
 <template>
   <Teleport to="body">
-    <dialog ref="dialog" :class="props.class" @cancel.stop.prevent="open = false">
+    <component
+      ref="dialog"
+      :is="tag"
+      class="dialog"
+      :class="classes"
+      @cancel.stop.prevent="open = false"
+    >
       <button
         v-if="xClose"
         class="close unstyled"
@@ -11,31 +17,72 @@
       </button>
 
       <slot />
-    </dialog>
+    </component>
+
+    <div v-if="compat" class="overlay"></div>
   </Teleport>
 </template>
 
 <script setup>
+const dialog = ref(null)
 const props = defineProps({
   class: String,
   xClose: Boolean,
+  compat: Boolean,
 })
 const open = defineModel('open', { required: true })
-const dialog = ref(null)
+const debouncedOpen = ref(open.value)
+const tag = computed(() => props.compat ? 'article' : 'dialog')
+const classes = computed(() => {
+  let obj = {
+    compat: props.compat,
+  }
 
-const show = () => dialog.value?.showModal()
+  // Apply passed classes
+  if (typeof props.class === 'string') {
+    obj[props.class] = true
+  } else if (Array.isArray(props.class)) {
+    props.class.forEach(c => {
+      obj[c] = true
+    })
+  } else if (typeof props.class === 'object') {
+    obj = {...obj, ...props.class}
+  }
+
+  // Apply open state class
+  if (props.compat && debouncedOpen.value) {
+    obj.open = true
+  }
+
+  return obj
+})
+
+const show = () => {
+  if (props.compat) {
+    debouncedOpen.value = true
+  } else {
+    dialog.value?.showModal()
+  }
+}
 const hide = () => {
   return new Promise((resolve) => {
     const keyFrame = new KeyframeEffect(
       dialog.value,
-      [{ translate: '0 var(--spacer)', opacity: '0' }],
+      [{
+        translate: '0 var(--spacer)',
+        opacity: '0'
+      }],
       { duration: 300, easing: 'ease', direction: 'normal' }
     )
 
     const animation = new Animation(keyFrame, document.timeline)
 
     animation.onfinish = () => {
-      dialog.value?.close()
+      if (props.compat) {
+        debouncedOpen.value = false
+      } else {
+        dialog.value?.close()
+      }
       resolve()
     }
     animation.play()
@@ -47,7 +94,7 @@ watchEffect(() => open.value ? show() : hide())
 </script>
 
 <style>
-dialog {
+.dialog {
   position: fixed;
   padding: calc(var(--spacer)*2);
   max-width: var(--dialog-width);
@@ -67,21 +114,46 @@ dialog {
     max-height: calc(100dvh - var(--spacer)*2);
   }
 
-  &::backdrop {
-    background: transparent;
-    backdrop-filter: none;
-    pointer-events: none;
+  &.compat {
+    transform: translate(-50%, -50%);
   }
 
-  &[open] {
+  &::backdrop,
+  + .overlay {
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  &[open],
+  &.open {
     animation: fade-in var(--speed);
     opacity: 1;
     pointer-events: all;
 
-    &::backdrop {
+    &.compat {
+      animation: compat-dialog-fade-in var(--speed);
+    }
+
+    &::backdrop,
+    + .overlay {
       background: var(--dialog-background-color);
       backdrop-filter: var(--blur);
-      pointer-events: none;
+    }
+  }
+
+  &.open {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: var(--z-index-dialog);
+
+    + .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: var(--z-index-overlay);
     }
   }
 
@@ -116,7 +188,20 @@ dialog {
 }
 
 html:has(dialog[open]),
-body:has(dialog[open]) {
+body:has(dialog[open]),
+html:has(.dialog.open),
+body:has(.dialog.open) {
   overflow: hidden;
+}
+
+@keyframes compat-dialog-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + var(--spacer)));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
