@@ -1,7 +1,7 @@
 /* MINIMAL PROSE */
 .prose {
   h1, h2, h3 {
-    width: min-content;
+    width: 100%;
     position: relative;
     margin: var(--spacer) 0;
     color: var(--color);
