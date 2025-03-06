@@ -19,7 +19,7 @@
       <slot />
     </component>
 
-    <div v-if="compat" class="overlay"></div>
+    <div v-if="compat" class="overlay" @click="open = false"></div>
   </Teleport>
 </template>
 
