@@ -33,6 +33,7 @@ const ICONS = {
   'Coinbase Wallet': 'coinbase.svg',
   MetaMask: 'metamask.svg',
   Phantom: 'phantom.svg',
+  Rabby: 'rabby.svg',
   Rainbow: 'rainbow.svg',
   WalletConnect: 'walletconnect.svg',
 }
