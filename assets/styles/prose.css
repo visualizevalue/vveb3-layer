@@ -1,6 +1,8 @@
 /* MINIMAL PROSE */
 .prose {
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     width: 100%;
     position: relative;
     margin: var(--spacer) 0;
@@ -11,7 +13,8 @@
     font-size: var(--font-xl);
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     font-size: var(--font-lg);
   }
 

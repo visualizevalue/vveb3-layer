@@ -32,7 +32,7 @@ const props = defineProps({
 })
 const open = defineModel('open', { required: true })
 const debouncedOpen = ref(open.value)
-const tag = computed(() => props.compat ? 'article' : 'dialog')
+const tag = computed(() => (props.compat ? 'article' : 'dialog'))
 const classes = computed(() => {
   let obj = {
     compat: props.compat,
@@ -42,11 +42,11 @@ const classes = computed(() => {
   if (typeof props.class === 'string') {
     obj[props.class] = true
   } else if (Array.isArray(props.class)) {
-    props.class.forEach(c => {
+    props.class.forEach((c) => {
       obj[c] = true
     })
   } else if (typeof props.class === 'object') {
-    obj = {...obj, ...props.class}
+    obj = { ...obj, ...props.class }
   }
 
   // Apply open state class
@@ -68,11 +68,13 @@ const hide = () => {
   return new Promise((resolve) => {
     const keyFrame = new KeyframeEffect(
       dialog.value,
-      [{
-        translate: '0 var(--spacer)',
-        opacity: '0'
-      }],
-      { duration: 300, easing: 'ease', direction: 'normal' }
+      [
+        {
+          translate: '0 var(--spacer)',
+          opacity: '0',
+        },
+      ],
+      { duration: 300, easing: 'ease', direction: 'normal' },
     )
 
     const animation = new Animation(keyFrame, document.timeline)
@@ -90,13 +92,13 @@ const hide = () => {
 }
 
 // Keep track of the open/hide state
-watchEffect(() => open.value ? show() : hide())
+watchEffect(() => (open.value ? show() : hide()))
 </script>
 
 <style>
 .dialog {
   position: fixed;
-  padding: calc(var(--spacer)*2);
+  padding: calc(var(--spacer) * 2);
   max-width: var(--dialog-width);
   width: 100%;
   background: var(--background);
@@ -111,7 +113,7 @@ watchEffect(() => open.value ? show() : hide())
   container-type: inline-size;
 
   @media (--md) {
-    max-height: calc(100dvh - var(--spacer)*2);
+    max-height: calc(100dvh - var(--spacer) * 2);
   }
 
   &.compat {

@@ -8,13 +8,15 @@
 import { useAccount, useEnsName } from '@wagmi/vue'
 
 const props = defineProps({
-  address: String
+  address: String,
 })
 
 const address = computed(() => props.address?.value || props.address)
 
 const { address: currentAddress } = useAccount()
-const isCurrent = computed(() => currentAddress.value?.toLowerCase() === address.value.toLowerCase())
+const isCurrent = computed(
+  () => currentAddress.value?.toLowerCase() === address.value.toLowerCase(),
+)
 
 const { data: ens } = useEnsName({
   address,

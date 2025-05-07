@@ -1,5 +1,7 @@
 <template>
-  <NuxtLink v-if="to" :to="to" class="button" :exact="exact" :target="target"><slot /></NuxtLink>
+  <NuxtLink v-if="to" :to="to" class="button" :exact="exact" :target="target">
+    <slot />
+  </NuxtLink>
   <button v-else class="button"><slot /></button>
 </template>
 
@@ -33,10 +35,10 @@ defineProps({
   border-radius: var(--button-border-radius);
 
   &.non-interactive,
-  &[disabled]:not([disabled="false"]) {
+  &[disabled]:not([disabled='false']) {
     pointer-events: none;
   }
-  &[disabled]:not([disabled="false"]) {
+  &[disabled]:not([disabled='false']) {
     color: var(--muted);
   }
 
